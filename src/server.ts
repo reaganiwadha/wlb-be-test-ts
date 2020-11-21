@@ -8,6 +8,15 @@ import loggingMiddleware from './middlewares/logging'
 import bodyParser from 'koa-bodyparser'
 import errorHandler from './middlewares/errorHandler'
 
+import mongoose from 'mongoose'
+
+if(process.env.MONGO_URI){
+    mongoose.connect(process.env.MONGO_URI, {
+        useUnifiedTopology : true,
+        useNewUrlParser : true
+    })
+}
+
 const PORT = 8000
 const app = new Koa()
 

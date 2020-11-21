@@ -13,8 +13,8 @@ module.exports = {
         references : {
           model : 'users',
           key : 'id',
-          onDelete : 'CASCADE'
         },
+        onDelete : 'CASCADE',
         allowNull : false
       },
       title : {
@@ -30,7 +30,7 @@ module.exports = {
         allowNull : false,
         defaultValue : false
       },
-      createdAt: Sequelize.DATE
+      created_at: Sequelize.DATE
     })
   },
 

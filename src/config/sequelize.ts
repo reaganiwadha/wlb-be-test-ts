@@ -5,5 +5,11 @@ if(!process.env.PG_CONN){
     process.exit()    
 }
 
-const sequelize = new Sequelize(process.env.PG_CONN)
+const sequelize = new Sequelize(process.env.PG_CONN, {
+    define : {
+        underscored : true,
+        createdAt : 'created_at',
+        updatedAt : 'updated_at'
+    }
+})
 export default sequelize

@@ -13,8 +13,8 @@ module.exports = {
         references : {
           model : 'users',
           key : 'id',
-          onDelete : 'CASCADE'
         },
+        onDelete : 'CASCADE',
         allowNull : false
       },
       user_post_id : {
@@ -22,8 +22,8 @@ module.exports = {
         references : {
           model : 'user_posts',
           key : 'id',
-          onDelete : 'CASCADE'
         },
+        onDelete : 'CASCADE',
         allowNull : false
       },
       parent_comment_id : {
@@ -31,14 +31,14 @@ module.exports = {
         references : {
           model : 'user_post_comments',
           key : 'id',
-          onDelete : 'CASCADE'
-        }
+        },
+        onDelete : 'CASCADE'
       },
       content : {
         type : Sequelize.STRING,
         allowNull : false
       },
-      createdAt: Sequelize.DATE
+      created_at: Sequelize.DATE
     })
   },
 

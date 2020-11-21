@@ -1,7 +1,7 @@
 import sequelize from '../config/sequelize'
-import { Model, DataTypes, Association } from 'sequelize'
-import UserEmailVerification from './UserEmailVerification';
-import UserPost from './UserPost';
+import { Model, DataTypes, Association, HasManyGetAssociationsMixin } from 'sequelize'
+import UserEmailVerification from './UserEmailVerification'
+import UserPost from './UserPost'
 
 interface UserAttributes{
     id? : number
@@ -17,6 +17,8 @@ export default class User extends Model<UserAttributes> implements UserAttribute
     public email!: string;
     public password!: string;
     public is_verified!: boolean;
+
+    public getPosts!: HasManyGetAssociationsMixin<UserPost>
 
     public static associations: {
         emailVerifications : Association<User, UserEmailVerification>
@@ -47,9 +49,9 @@ User.init(
     {
         tableName : 'users',
         sequelize,
-        timestamps: false
+        timestamps: false,
+        underscored : true
     }
 )
 
 User.hasMany(UserEmailVerification)
-User.hasMany(UserPost)

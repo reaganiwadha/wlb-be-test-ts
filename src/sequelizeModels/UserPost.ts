@@ -1,5 +1,5 @@
 import sequelize from '../config/sequelize'
-import { Model, DataTypes, Association } from 'sequelize'
+import { Model, DataTypes, Association, BelongsToManyGetAssociationsMixin } from 'sequelize'
 import User from './User'
 
 interface UserPostAttributes{
@@ -8,6 +8,7 @@ interface UserPostAttributes{
     title : string
     content : string
     is_moderation_enabled : boolean
+    created_at? : Date
 }
 
 export default class UserPost extends Model<UserPostAttributes> implements UserPostAttributes{
@@ -16,6 +17,9 @@ export default class UserPost extends Model<UserPostAttributes> implements UserP
     public title!: string
     public content!: string
     public is_moderation_enabled!: boolean
+    public created_at?: Date
+
+    public getOwner! : BelongsToManyGetAssociationsMixin<User>
 
     public static associations: {
         user : Association<UserPost, User>
@@ -33,7 +37,7 @@ UserPost.init(
             type : DataTypes.INTEGER,
             references : {
                 model : 'users',
-                key : 'id'
+                key : 'id',
             }
         },
         title : {
@@ -44,12 +48,19 @@ UserPost.init(
         },
         is_moderation_enabled : {
             type : DataTypes.BOOLEAN
+        },
+        created_at : {
+            type : DataTypes.DATE
         }
     },
     {
         tableName : 'user_posts',
         sequelize,
-        timestamps: false,
+        timestamps: true,
+        updatedAt : false,
         underscored : true
     }
 )
+
+UserPost.belongsTo(User)
+User.hasMany(UserPost, { onDelete: 'cascade' })

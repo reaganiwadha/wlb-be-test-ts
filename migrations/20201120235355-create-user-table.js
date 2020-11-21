@@ -27,7 +27,7 @@ module.exports = {
         allowNull : false,
         defaultValue : false
       },
-      createdAt: Sequelize.DATE
+      created_at: Sequelize.DATE
     })
   },
 

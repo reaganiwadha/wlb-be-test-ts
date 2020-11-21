@@ -13,8 +13,8 @@ module.exports = {
         references : {
           model : 'users',
           key : 'id',
-          onDelete : 'CASCADE'
         },
+        onDelete : 'CASCADE',
         allowNull : false
       },
       user_post_id : {
@@ -22,15 +22,17 @@ module.exports = {
         references : {
           model : 'user_posts',
           key : 'id',
-          onDelete : 'CASCADE'
         },
+        onDelete : 'CASCADE',
         allowNull : false
       },
-      content : {
-        type : Sequelize.STRING,
-        allowNull : false
-      },
-      createdAt: Sequelize.DATE
+      created_at: Sequelize.DATE
+    })
+
+    await queryInterface.addConstraint('user_post_likes', {
+      type : 'unique',
+      name : 'unique_like_constraint',
+      fields : ['user_id', 'user_post_id']
     })
   },
 

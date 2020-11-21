@@ -1,5 +1,6 @@
 import sequelize from '../config/sequelize'
-import { Model, DataTypes, Association } from 'sequelize'
+import { Model, DataTypes, Association, BelongsToManyGetAssociationsMixin } from 'sequelize'
+import User from './User'
 
 interface UserEmailVerificationAttributes{
     id? : number
