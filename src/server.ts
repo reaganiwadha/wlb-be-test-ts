@@ -17,7 +17,7 @@ if(process.env.MONGO_URI){
     })
 }
 
-const PORT = 8000
+const PORT = process.env.PORT || 8000
 const app = new Koa()
 
 app.use(loggingMiddleware)
